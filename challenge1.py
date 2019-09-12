@@ -11,6 +11,7 @@ class Challenge:
 
         Args:
             self: self class object
+
         """
         # Define class API
         self.api = API1()
@@ -20,6 +21,15 @@ class Challenge:
         self.total = 0
 
     def remove_duplicates(self, objects: list):
+        """Function to remove identical objects from list
+
+        Args:
+            objects (list): List with objects to verify duplicates
+
+        Returns:
+            result (list): List without duplicated objects
+
+        """
         # Filter list removing duplicates
         result = [
             item
@@ -206,25 +216,37 @@ class Challenge:
             return True
 
 
+# Configure logging
 logging.basicConfig(level=logging.INFO, format="%(name)s: %(levelname)s - %(message)s")
 
 
 def main():
     """
     Main function to execute the process
+
+    Returns:
+        bool: True if executed without errors, otherwise False
+
     """
     try:
         # Instantiate the class and separate objects into two lists
         challenge = Challenge()
+        # Get all products
         product_base = challenge.get_products("product_groups.json")
+        # Divide the products into independent (no parent) and dependent (with parents)
         independent, dependent = challenge.filter_products(product_base)
 
         if not challenge.save_independent_products(independent):
-            raise Exception
+            raise Exception("Function save_independent_products() couldn't complete")
         if not challenge.save_dependent_products(dependent, product_base):
-            raise Exception
+            raise Exception("Function save_dependent_products() couldn't complete")
+
     except Exception as err:
         logging.error(f"[ERROR] While processing the objects. Traceback: {err}")
+        return False
+    else:
+        logging.info("[INFO] Execution done with no errors!")
+        return True
 
 
 if __name__ == "__main__":
