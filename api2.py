@@ -9,7 +9,7 @@ class API2(API1):
     def create(self, data: dict):
         """Store one new object."""
         self._maybe_crash()
-        new_obj = {**data, "id": uuid4()}
+        new_obj = {**data, "id": str(uuid4())}
         self._storage[new_obj["id"]] = new_obj
         return new_obj
 
