@@ -8,6 +8,6 @@ class API3(API2):
     def bulk_create(self, data: List[dict]):
         """Store multiple objects."""
         self._maybe_crash()
-        new_objs = [{**obj, "id": uuid4()} for obj in data]
-        self._storage.update({obj["id"]: obj for obj in data})
+        new_objs = [{**obj, "id": str(uuid4())} for obj in data]
+        self._storage.update({obj["id"]: obj for obj in new_objs})
         return new_objs
