@@ -50,6 +50,7 @@ class Challenge:
 
         """
         try:
+            # Opens file for read and parse the JSON
             file = open(filename, "r")
             products = json.load(file)
         except FileNotFoundError as err:
@@ -149,6 +150,7 @@ class Challenge:
                 )
                 logging.info(f"[INFO] Object created: {response}")
                 logging.info(f"[INFO] Storage size: {len(self.api._storage)}")
+                # Save the created object
                 self.SAVED_OBJECTS.append(response)
 
             if len(products) != len(self.api._storage):
@@ -201,6 +203,7 @@ class Challenge:
                 )
                 logging.info(f"[INFO] Object created: {response}")
                 logging.info(f"[INFO] Storage size: {len(self.api._storage)}")
+                # Save the created object
                 self.SAVED_OBJECTS.append(response)
             if self.total != len(self.api._storage):
                 raise Exception(
