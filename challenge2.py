@@ -267,10 +267,10 @@ class Challenge:
                 response = self.api.create(
                     data={"name": product["name"], "parent_id": None, "ancestors": None}
                 )
-                logging.info(f"[INFO] Object created: {response}")
-                logging.info(f"[INFO] Storage size: {len(self.SAVED_OBJECTS)}")
                 # Adds the created object to SAVED_OBJECTS
                 self.SAVED_OBJECTS.append(response)
+                logging.info(f"[INFO] Object created: {response}")
+                logging.info(f"[INFO] Storage size: {len(self.SAVED_OBJECTS)}")
                 # Adds 1 to the last execution number
                 self.save_last_execution(last + 1)
                 # Save on backup the created objects
@@ -340,10 +340,11 @@ class Challenge:
                         "ancestors": list(set([item["name"] for item in ancestors])),
                     }
                 )
-                logging.info(f"[INFO] Object created: {response}")
-                logging.info(f"[INFO] Storage size: {len(self.SAVED_OBJECTS)}")
+
                 # Adds the created object to SAVED_OBJECTS
                 self.SAVED_OBJECTS.append(response)
+                logging.info(f"[INFO] Object created: {response}")
+                logging.info(f"[INFO] Storage size: {len(self.SAVED_OBJECTS)}")
                 # Adds 1 to the last execution number
                 self.save_last_execution(last + 1)
                 # Save on backup the created objects
